@@ -618,6 +618,10 @@ opacity: 1;
     background-color: transparent;
     color:var(--first-color)
 }
+/* new-arrival-section */
+.new__arrivals{
+    overflow: hidden;
+}
 /*=====BASE====*/
 /*=====BASE====*/
 /* 1. Fix the Image Transition */
