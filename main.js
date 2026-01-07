@@ -25,8 +25,10 @@ var swiperCategories = new Swiper(".categories__container", {
   },
 });
 // product-tabs
-const tabs=document.querySelectorAll('[data-target]'),
+const tabs=document.querySelectorAll('[data-target]')
+
 tabContents=document.querySelectorAll('[content]')
+
 tabs.forEach((tab)=>{
   tab.addEventListener('click',()=>{
     const target=document.querySelector(tab.dataset.target)
