@@ -196,7 +196,7 @@ outline:none;
     position: relative;
 }
 .header__action-btn img{
-    width:30px;
+    width:24px;
 }
 .header__search .form__input{
     
@@ -546,9 +546,13 @@ opacity: 1;
 }
 .deals__item:nth-child(1){
    background-image: url(/images/deals-1.jpg);
+   background-position: center;
+   background-size: cover;
 }
 .deals__item:nth-child(2){
     background-image: url(./images//deals-2.png);
+    background-position: 85% center;
+    background-size: cover;
 }
 .deals__item{
     padding:3rem;
@@ -613,6 +617,8 @@ opacity: 1;
     font-size:var(--small-font-size);
     text-align: center;
     display: block;
+    color:black;
+    font-weight: 600;
 }
 .deals__btn .btn{
     background-color: transparent;
@@ -663,6 +669,59 @@ opacity: 1;
     overflow: hidden;
     text-overflow: ellipsis;
     margin-bottom: 0.5rem;
+}
+/* newsletter-section */
+.newsletter__container{
+    grid-template-columns: repeat(2,3.5fr) 5fr;
+    align-items: center;
+    column-gap: 3rem;
+}
+.newsletter__icon{
+    width:40px;
+}
+.newsletter{
+    background-color: hsl(166,23%,74%);
+}
+.home__newsletter{
+    margin-top:2rem;
+}
+.newsletter__title{
+    column-gap: 1rem;
+    font-size:var(--large-font-size)
+}
+.newsletter__description{
+    color:var(--title-color);
+    font-family: var(--secound-font);
+    font-size:var(--small-font-size);
+    font-weight: var(--weight-600);
+}
+.newsletter__form{
+    display: flex;
+}
+.newsletter__input,
+.newsletter__btn{
+    font-size:var(--small-font-size)
+}
+.newsletter__input{
+    background-color:var(--body-color);
+    padding-inline:1.25rem;
+    width:100%;
+    height:48px;
+    border-radius:.25rem 0 0 0.25rem;
+}
+.newsletter__btn{
+    background-color:var(--title-color);
+    color:var(--body-color);
+    padding-inline:2rem;
+    border-radius:0 0.25rem 0.25rem 0;
+    font-family: var(--second-font);
+    font-weight: var(--weight-500);
+    letter-spacing: .5px;
+    cursor:pointer;
+    transition: all .3s var(--transition);
+}
+.newsletter__btn:hover{
+    background-color:var(--first-color)
 }
 /*=====BASE====*/
 /* 1. Fix the Image Transition */
