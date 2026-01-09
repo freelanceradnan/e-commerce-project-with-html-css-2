@@ -75,11 +75,16 @@ tabs.forEach((tab)=>{
 document.addEventListener('DOMContentLoaded',()=>{
 
   async function fetchproductapi(url){
+        const loader=document.getElementById('loader-section')
+    
    try{
-     
+   
+    loader.style.display="flex"
    let res=await fetch(url)
    let data=await res.json()
+
    const productContainers=document.querySelectorAll('.product__container')
+     
   if(productContainers.length === 0||data.length === 0)return;
    data.forEach((product, index)=>{
     const productHTML=`
@@ -139,6 +144,9 @@ if(productContainers[2]) productContainers[2].innerHTML+=productHTML
    catch(error){
 console.log('error getting products:',error)
    }
+   finally{
+    loader.style.display="none"
+   }
   }
   fetchproductapi('https://fakestoreapi.com/products')
 })
@@ -146,11 +154,13 @@ console.log('error getting products:',error)
 // all-swiper-section
 document.addEventListener('DOMContentLoaded',()=>{
   async function fetchapiswiper(url){
-  try {
+    const loader=document.getElementById('loader-section-slider')
     let swiper_div=document.querySelectorAll('.swiper-wrapper')
-    
+  try {
+    loader.style.display="flex"
     let res=await fetch(url)
     let data=await res.json()
+    swiper_div.forEach((div=>div.innerHTML=''))
     data.reverse().forEach((product,index)=>{
     const swiper=`
     
@@ -184,6 +194,9 @@ document.addEventListener('DOMContentLoaded',()=>{
     })
   } catch (error) {
     
+  }
+  finally{
+    loader.style.display="none"
   }
   }
   fetchapiswiper('https://fakestoreapi.com/products')

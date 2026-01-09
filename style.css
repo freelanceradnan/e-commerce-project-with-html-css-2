@@ -822,7 +822,47 @@ opacity: 1;
     color:var(--text-color-light);
     font-size:var(--small-font-size)
 }
-/*=====BASE====*/
+/*=====Loading prduct section====*/
+#loader-section,
+#loader-section-slider{
+    display: none;
+    justify-content: center;
+    gap:30px;
+    height: 100vh;
+    width:100%;
+    
+}
+#loader-section div:nth-child(1),
+#loader-section-slider div:nth-child(1){
+    animation-delay: 0s;
+}
+#loader-section div:nth-child(2),
+#loader-section-slider div:nth-child(2){
+    animation-delay: 0.2s;
+}
+#loader-section div:nth-child(3),
+#loader-section-slider div:nth-child(3){
+    animation-delay: 0.4s;
+}
+.rounder{
+    height:20px;
+    width:20px;
+    background-color: var(--first-color);
+    border-radius: 50%;
+    box-shadow: 0 -0.6rem rgba(60,0,80,0.1) inset;
+   animation: cycle 1s ease-in-out infinite;
+}
+@keyframes cycle{
+0%{
+transform: translateY(0rem);
+}
+50%{
+transform: translateY(1rem);
+}
+100%{
+    transform: translateY(0rem);
+}
+}
 /* 1. Fix the Image Transition */
 
 
