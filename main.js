@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     const productHTML=`
      <div class="product__item">
                     <div class="product__banner">
-                        <a href="details.html" class="product__main-images">
+                        <a href="details.html" onClick="getid(${product.id})" class="product__main-images">
                             <img src="${product.image}" alt="" class="product__main-img default">
                             <img src="${product.image}" alt="" class="product__main-img hover">
                         </a>
@@ -107,9 +107,9 @@ document.addEventListener('DOMContentLoaded',()=>{
                         </div>
                         <div class="product__badge light-pink">Hot</div>
                     </div>
-                    <div class="product__content">
+<div class="product__content" onClick="window.location.href='details.html';getid(${product.id})">
                         <span class="product__category">${product.category}</span>
-                        <a href="details.html">
+                        <a href="#">
                             <h3 class="product-title">${product.title}</h3>
                             </a>
                             <div class="product-rating">
@@ -129,6 +129,7 @@ document.addEventListener('DOMContentLoaded',()=>{
                     </div>
                 </div>
     `;
+    
     if(index<8){
      productContainers[0].innerHTML+=productHTML;
     }
