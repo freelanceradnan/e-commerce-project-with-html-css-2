@@ -3,7 +3,9 @@ document.addEventListener('DOMContentLoaded',()=>{
     .then(res=>res.json())
     .then(data=>{
         let id=localStorage.getItem('id')
+
         let newProduct=data.find(product=>product.id==Number(id))
+        console.log(id)
         document.getElementById('product-details').innerHTML=`
         <div class="details__container container grid">
 <div class="details__group">
