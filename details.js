@@ -1,11 +1,13 @@
+let alldataProduct=[];
 document.addEventListener('DOMContentLoaded',()=>{
     fetch('https://fakestoreapi.com/products')
     .then(res=>res.json())
     .then(data=>{
+        alldataProduct=data;
         let id=localStorage.getItem('id')
 
         let newProduct=data.find(product=>product.id==Number(id))
-        console.log(id)
+        
         document.getElementById('product-details').innerHTML=`
         <div class="details__container container grid">
 <div class="details__group">
@@ -18,7 +20,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 </div>
 <div class="details__group">
     <h3 class="details__title">Henley Shirt</h3>
-    <p class="details__brand">Brands: <span>adidas</span></p>
+    <p class="details__brand">Brands: <span id="details__brand-span">${newProduct.category}</span></p>
     <div class="details__price flex">
     <span class="new__price">$116</span>
     <span class="old__price">$200.00</span>
@@ -98,5 +100,14 @@ document.addEventListener('DOMContentLoaded',()=>{
 </div>
 </div>
         `
+innerData()
     })
+    
 })
+
+function innerData(){
+let brandText=document.querySelector('#details__brand-span')
+if(brandText.innerText=="men's clothing"){
+    console.log('brand mens')
+}
+}
