@@ -79,7 +79,9 @@ document.addEventListener('DOMContentLoaded',()=>{
     
    try{
    
-    loader.style.display="flex"
+    if(loader){
+      loader.style.display="flex"
+    }
    let res=await fetch(url)
    let data=await res.json()
 
@@ -146,7 +148,9 @@ if(productContainers[2]) productContainers[2].innerHTML+=productHTML
 console.log('error getting products:',error)
    }
    finally{
-    loader.style.display="none"
+    if(loader){
+      loader.style.display="none"
+    }
    }
   }
   fetchproductapi('https://fakestoreapi.com/products')
@@ -197,7 +201,9 @@ document.addEventListener('DOMContentLoaded',()=>{
     
   }
   finally{
-    loader.style.display="none"
+    if(loader){
+      loader.style.display="none"
+    }
   }
   }
   fetchapiswiper('https://fakestoreapi.com/products')

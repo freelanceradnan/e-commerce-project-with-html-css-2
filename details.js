@@ -100,14 +100,61 @@ document.addEventListener('DOMContentLoaded',()=>{
 </div>
 </div>
         `
-innerData()
+innerData(newProduct)
     })
     
 })
 
-function innerData(){
+function innerData(product){
+let table=document.getElementById('info__table')
 let brandText=document.querySelector('#details__brand-span')
-if(brandText.innerText=="men's clothing"){
-    console.log('brand mens')
-}
+table.innerHTML=''
+ if (product.category === "men's clothing") {
+        table.innerHTML += `
+            <tr>
+                <th class="table__header">Fjallraven - Foldsack No. 1 Backpack:</th>
+                <td class="table__data">A functional backpack with a 15-inch laptop sleeve and a classic fold-over design.</td>
+            </tr>
+            <tr>
+                <th class="table__header">Mens Casual Premium Slim Fit T-Shirts:</th>
+                <td class="table__data">These shirts offer a modern, slim-fit silhouette with a comfortable cotton-blend fabric. They are designed to be breathable and lightweight for everyday wear.</td>
+            </tr>
+            <tr>
+                <th class="table__header">Mens Cotton Jacket:</th>
+                <td class="table__data">A rugged, mid-weight jacket featuring a stand collar and multiple functional pockets.</td>
+            </tr>
+        `;
+    }
+else if(product.category === "jewelery") {
+        table.innerHTML += `
+            <tr>
+                <th class="table__header">John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet:</th>
+                <td class="table__data">A handcrafted piece featuring 925 sterling silver and 18K yellow gold.</td>
+            </tr>
+            <tr>
+                <th class="table__header">Solid Gold Petite Micropave:</th>
+                <td class="table__data">A delicate ring crafted from 14K yellow gold and adorned with tiny, shimmering diamonds.</td>
+            </tr>
+            <tr>
+                <th class="table__header">White Gold Plated Princess:</th>
+                <td class="table__data">center stone. The band is plated in white gold for a polished, brilliant finish.</td>
+            </tr>
+        `;
+    }
+else {
+        table.innerHTML += `
+            <tr>
+                <th class="table__header">BIYLACLESEN Women's 3-in-1 Snowboard Jacket:</th>
+                <td class="table__data">A heavy-duty winter jacket with a detachable fleece inner and a windproof, water-resistant outer shell.</td>
+            </tr>
+            <tr>
+                <th class="table__header">Lock and Love Women's Removable Hooded Biker Jacket:</th>
+                <td class="table__data">A chic faux-leather jacket with a removable knit hood.</td>
+            </tr>
+            <tr>
+                <th class="table__header">DANVOUY Womens T Shirt Casual Cotton Short Sleeve:</th>
+                <td class="table__data">A soft, stretchy tee with a classic crew neck and "Letter Print" design.</td>
+            </tr>
+        `;
+    }
 }

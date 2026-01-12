@@ -1099,16 +1099,16 @@ font-weight: var(--weight-600);
 .details__tab-content:not(.active-tab){
     display: none;
 }
-.info__table tr th,
-.info__table tr td{
+.table__header,
+.table__data{
     border:1px solid var(--border-color-alt);
     padding:0.625rem 1.2rem;
 }
-.info__table tr th{
+.table__header{
     font-weight: var(--weight-500);
     text-align: left;
 }
-.info__table tr td{
+.table__data{
     color:var(--text-color-light)
 }
 .reviews__container{
