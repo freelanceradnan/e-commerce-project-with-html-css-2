@@ -416,7 +416,9 @@ table{
     text-align: center;
 }
 
-.product__container{
+.product__container,
+#product__related-section
+{
     grid-template-columns: repeat(4,1fr);
 }
 .tab__item:not(.active-tab){
