@@ -203,7 +203,7 @@ table{
     cursor: pointer;
 }
 .header__user-actions{
-    column-gap: 1.2rem;
+    column-gap: 2rem;
 }
 .header__action-btn{
     position: relative;
@@ -227,6 +227,11 @@ table{
     border-radius: 50%;
     text-align: center;
     font-size: var(--tiny-font-size);
+}
+#counter__total{
+    font-size:.8rem;
+    text-align: center;
+    font-weight: 500;
 }
 .active-link,
 .nav__link:hover{

@@ -61,12 +61,12 @@
     <div class="header__user-actions">
 <a href="wishlist.html" class="header__action-btn">
     <img src="images/icon-heart.svg" alt="">
-    <span class="count">3</span>
+    <span class="count" id="counter__total-wishlist">3</span>
 </a>
 
 <a href="cart.html" class="header__action-btn">
     <img src="images/icon-cart.svg" alt="">
-    <span class="count">3</span>
+    <span class="count" id="counter__total"></span>
 </a>
     </div>
 </nav>
@@ -193,12 +193,13 @@
  <script>
 function getid(id){
     localStorage.setItem('id',id)
-    console.log(id)
+    
 }
  
  </script>
   <script src="shop.js"></script>
- 
-  
+  <script src="common.js"></script>
+  <script src="common-wishlist.js"></script>
+
 </body>
-</html>
+</html> 

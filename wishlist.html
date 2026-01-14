@@ -62,12 +62,12 @@
     <div class="header__user-actions">
 <a href="wishlist.html" class="header__action-btn">
     <img src="images/icon-heart.svg" alt="">
-    <span class="count">3</span>
+    <span class="count" id="counter__total-wishlist"></span>
 </a>
 
 <a href="cart.html" class="header__action-btn">
     <img src="images/icon-cart.svg" alt="">
-    <span class="count">3</span>
+    <span class="count" id="counter__total"></span>
 </a>
     </div>
 </nav>
@@ -95,7 +95,10 @@
                 <th>Action</th>
                 <th>Remove</th>
             </tr>
-            <tr>
+            <tbody class="product-wishlist-tbody">
+
+            </tbody>
+          <!-- <tr>
                 <td><img src="images/product-1-1.jpg" class="table__img"></td>
                 <td>
                     <h3 class="table__title">Tshirt for man</h3>
@@ -125,22 +128,8 @@
               <td><span class="total__stock">In Stock</span></td>
               <td><a href="#" class="btn btn btn--sm">Add to Cart</a></td>
               <td><i class="fi fi-rs-trash table__trash"></i></td>
-            </tr>
-             <tr>
-                <td><img src="images/product-1-1.jpg" class="table__img"></td>
-               <td>
-                    <h3 class="table__title">Tshirt for man</h3>
-                     <p class="table__description">
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi, maiores!
-                </p>
-                </td>
-              <td>
-                <span class="table__price">110$</span>
-              </td>
-              <td><span class="total__stock">In Stock</span></td>
-              <td><a href="#" class="btn btn btn--sm">Add to Cart</a></td>
-              <td><i class="fi fi-rs-trash table__trash"></i></td>
-            </tr>
+            </tr> -->
+            
         </table>
     </div>
       </section>
@@ -240,7 +229,11 @@
      </div>   
      </footer> 
 <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
- <script src="main.js"></script>
+
+  <script src="common.js"></script>
+  <script src="wishlist.js"></script>
+  <script src="common-wishlist.js"></script>
+  
 <!-- breadcrumb -->
 </body>
 </html>

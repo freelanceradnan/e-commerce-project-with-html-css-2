@@ -9,6 +9,7 @@ function renderCart(){
         return;
     }
     cart.forEach((item,index)=>{
+        
         const tr=document.createElement('tr')
         const cleanPrice = parseFloat(String(item.price).replace(/[^0-9.]/g, '')) || 0;
         const itemQty=parseInt(item.qty)||1;
@@ -23,10 +24,11 @@ function renderCart(){
            <td><span class="table__subtotal">$${itemSubtotal}</span></td>
             <td><button class="remove-btn" data-index="${index}">X</button></td>
         `
-        console.log('Item Price:', item.price, 'Cleaned:', cleanPrice);
+       
     tbody.appendChild(tr)
-    updateSubTotal(cart)
+  
     })
+      updateSubTotal(cart)
 }
 document.querySelector('.product-tbody').addEventListener('input',e=>{
     if(e.target.classList.contains('qty-input')){
@@ -48,14 +50,19 @@ document.querySelector('.product-tbody').addEventListener('click',e=>{
     }
 })
 
-function updateSubTotal(cart)
-{
+function updateSubTotal(cart){
+    
+
     let subtotal=0;
     cart.forEach(item=>{
         const price = parseFloat(String(item.price).replace(/[^0-9.]/g, '')) || 0;
         const qty=parseInt(item.qty)||1;
         subtotal+=price*qty
+       
+       
     })
+   
+    
     const shipping=cart.length>0?10:0;
     const total=subtotal+shipping;
     const subtotalElement = document.querySelector('.cart__total-table tr:nth-child(1) .cart__total-price');
@@ -64,6 +71,8 @@ function updateSubTotal(cart)
     if (subtotalElement) subtotalElement.innerText = `$${subtotal.toFixed(2)}`;
     if (shippingElement) shippingElement.innerText = `$${shipping.toFixed(2)}`;
   if (totalElement) totalElement.innerText = `$${total.toFixed(2)}`;
-
+  if(typeof updateCartBadge==="function"){
+    updateCartBadge()
+     }
 }
 document.addEventListener('DOMContentLoaded', renderCart);

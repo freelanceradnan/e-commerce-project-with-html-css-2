@@ -33,7 +33,7 @@ const showpageNumber=(pageNumber)=>{
                                 <i class="fi fi-rs-eye"></i>
                             </a>
                              <a href="#" class="action__btn" aria-label="Add To Wishlist">
-                                <i class="fi fi-rs-heart"></i>
+                                <i class="fi fi-rs-heart" id="add-to-wishlist" onClick="getid(${product.id})"></i>
                             </a>
                              <a href="#" class="action__btn" aria-label="Compare">
                                 <i class="fi fi-rs-shuffle"></i>
@@ -64,8 +64,13 @@ const showpageNumber=(pageNumber)=>{
                 </div>
     
     `
+    let wishlistbtn=document.querySelectorAll('#add-to-wishlist').forEach((btn)=>{
+    btn.addEventListener('click',wishListFunc)
     
+  })
+  
     })
+    
     
 }
 
@@ -92,4 +97,31 @@ const renderPaginationButtons = () => {
         paginationSection.appendChild(btn);
     }
 }
-productLoader()
+// wishlist--section
+function wishListFunc(e){
+  e.preventDefault()
+  let section=e.currentTarget.closest('.product__item')
+  let fullTitle=section.querySelector('.product-title').innerText
+  let shortTitle=fullTitle.split(' ').slice(0,4).join(' ')
+  let productWishlist={
+    id:localStorage.getItem('id'),
+    title:shortTitle,
+    image:section.querySelector('img').src,
+    price:section.querySelector('.new__price').innerText,
+  }
+ 
+  let wishlist=JSON.parse(localStorage.getItem('wishlist'))||[]
+  let exists=wishlist.find(item=>item.id===productWishlist.id)
+  if(exists){
+    alert('already added!Wishlist Checkout')
+  }
+  else{
+    wishlist.push(productWishlist)
+    alert('WishList Added!')
+    location.reload()
+  }
+  localStorage.setItem('wishlist',JSON.stringify(wishlist))
+  
+}
+
+document.addEventListener('DOMContentLoaded',productLoader)

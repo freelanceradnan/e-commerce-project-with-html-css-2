@@ -246,5 +246,7 @@ function addtoCartFunc(e){
     cart.push(product)
    }
    localStorage.setItem('cart',JSON.stringify(cart))
+  
    alert('product added')
+    location.reload();
 }

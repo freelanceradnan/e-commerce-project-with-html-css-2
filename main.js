@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded',()=>{
                             <a href="#" class="action__btn" aria-label="Quick view">
                                 <i class="fi fi-rs-eye"></i>
                             </a>
-                             <a href="#" class="action__btn" aria-label="Add To Wishlist">
+                             <a href="#" class="action__btn" aria-label="Add To Wishlist" id="add-to-wishlist" onClick="getid(${product.id})">
                                 <i class="fi fi-rs-heart"></i>
                             </a>
                              <a href="#" class="action__btn" aria-label="Compare">
@@ -141,8 +141,11 @@ document.addEventListener('DOMContentLoaded',()=>{
     else{
 if(productContainers[2]) productContainers[2].innerHTML+=productHTML
     }
-    
+  
    })
+   let wishlistbtn=document.querySelectorAll('#add-to-wishlist').forEach((btn)=>{
+    btn.addEventListener('click',wishListFunc)
+  })
    }
    catch(error){
 console.log('error getting products:',error)
@@ -242,3 +245,28 @@ function timeDown() {
 
 timeDown();
 setInterval(timeDown, 1000);
+// wishlist--section
+function wishListFunc(e){
+  e.preventDefault()
+  let section=e.currentTarget.closest('.product__item')
+  let fullTitle=section.querySelector('.product-title').innerText
+  let shortTitle=fullTitle.split(' ').slice(0,4).join(' ')
+  let productWishlist={
+    id:localStorage.getItem('id'),
+    title:shortTitle,
+    image:section.querySelector('img').src,
+    price:section.querySelector('.new__price').innerText,
+  }
+  let wishlist=JSON.parse(localStorage.getItem('wishlist'))||[]
+  let exists=wishlist.find(item=>item.id===productWishlist.id)
+  if(exists){
+    alert('already added!Wishlist Checkout')
+  }
+  else{
+    wishlist.push(productWishlist)
+    alert('WishList Added!')
+    location.reload()
+  }
+  localStorage.setItem('wishlist',JSON.stringify(wishlist))
+  
+}
