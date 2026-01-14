@@ -19,15 +19,15 @@ document.addEventListener('DOMContentLoaded',()=>{
 </div>
 </div>
 <div class="details__group">
-    <h3 class="details__title">Henley Shirt</h3>
+    <h3 class="details__title">${(newProduct.title).split(" ").slice(0,5).join(" ")}</h3>
     <p class="details__brand">Brands: <span id="details__brand-span">${newProduct.category}</span></p>
     <div class="details__price flex">
-    <span class="new__price">$116</span>
-    <span class="old__price">$200.00</span>
-    <span class="save__price">25%off</span>
+    <span class="new__price">$${newProduct.price}</span>
+    <span class="old__price">$${(newProduct.price+10).toFixed(2)}</span>
+    <span class="save__price">${ ((10 / (newProduct.price + 10)) * 100).toFixed(0) }%OFF</span>
     </div>
     <p class="short__description">
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquam, deleniti dolores eligendi neque omnis cumque non vel delectus? Rerum, aspernatur.
+        ${newProduct.description}
     </p>
     <ul class="product__list">
         <li class="list__item flex">
@@ -79,8 +79,8 @@ document.addEventListener('DOMContentLoaded',()=>{
        </ul>
     </div>
 <div class="details-action">
-    <input type="number" class="quantity" value="3">
-<a href="#" class="btn btn--sm">Add To Cart</a>
+    <input type="number" class="quantity" value="1" min="1">
+<a href="#" class="btn btn--sm" id="addtocart">Add To Cart</a>
 <a href="#" class="details__action-btn">
     <i  class="fi fi-rs-heart"></i>
 </a>
@@ -102,7 +102,10 @@ document.addEventListener('DOMContentLoaded',()=>{
         `
 innerData(newProduct)
 relatedProductApi(newProduct)
-    })
+document.querySelectorAll('#addtocart').forEach(btn=>{
+    btn.addEventListener('click',addtoCartFunc)
+})
+
     
 })
 
@@ -218,4 +221,30 @@ catch(error){
     console.log('your error is:',error)
 }
     
+}
+})
+function addtoCartFunc(e){
+    e.preventDefault();
+    let section=e.currentTarget.closest('#product-details')
+    let priceText = section.querySelector('.new__price').innerText;
+    let numericPrice = parseFloat(priceText.replace(/[^0-9.]/g, '')) || 0;
+    let qtyInput=section.querySelector('.quantity').value
+    let product={
+        id:localStorage.getItem('id'),
+        title:section.querySelector('.details__title').innerText,
+        image:section.querySelector('img').src,
+        qty:Number(qtyInput),
+        price:numericPrice,
+   }
+   
+   let cart=JSON.parse(localStorage.getItem('cart'))||[]
+   const exists=cart.find(item=>item.id===product.id)
+  if(exists){
+   exists.qty=Number(exists.qty)+Number(product.qty)
+  }
+   else{
+    cart.push(product)
+   }
+   localStorage.setItem('cart',JSON.stringify(cart))
+   alert('product added')
 }
