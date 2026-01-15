@@ -41,7 +41,9 @@ function renderCart(){
    }
   
 }
-document.querySelector('.product-wishlist-tbody').addEventListener('click',e=>{
+let mainProductDiv=document.querySelector('.product-wishlist-tbody')
+if(mainProductDiv){
+  mainProductDiv.addEventListener('click',e=>{
     if(e.target.classList.contains('table__trash')){
       let index=e.target.dataset.index;
       let wishlist=JSON.parse(localStorage.getItem('wishlist'))||[]
@@ -51,6 +53,7 @@ document.querySelector('.product-wishlist-tbody').addEventListener('click',e=>{
     }
    
 })
+}
 
 // addtocart
 function addtoCartFunc(e){

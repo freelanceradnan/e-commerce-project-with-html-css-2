@@ -28,27 +28,40 @@ function renderCart(){
     tbody.appendChild(tr)
   
     })
-      updateSubTotal(cart)
+      updateSubTotal(cart);
+      
 }
-document.querySelector('.product-tbody').addEventListener('input',e=>{
+let inputDiv=document.querySelector('.product-tbody')
+if(inputDiv){
+inputDiv.addEventListener('input',e=>{
     if(e.target.classList.contains('qty-input')){
         const index=e.target.dataset.index;
         let cart=JSON.parse(localStorage.getItem('cart'))||[]
         cart[index].qty=parseInt(e.target.value)||1;
         localStorage.setItem('cart',JSON.stringify(cart))
+        
         renderCart()
-    }
-})
 
-document.querySelector('.product-tbody').addEventListener('click',e=>{
+    }
+    
+})
+}
+
+
+let productDel=document.querySelector('.product-tbody')
+if(productDel){
+productDel.addEventListener('click',e=>{
     if(e.target.classList.contains('remove-btn')){
         const index=e.target.dataset.index;
         let cart=JSON.parse(localStorage.getItem('cart'))||[]
         cart.splice(index,1);
         localStorage.setItem('cart',JSON.stringify(cart))
         renderCart()
+        location.reload()
     }
 })
+}
+
 
 function updateSubTotal(cart){
     
@@ -64,15 +77,28 @@ function updateSubTotal(cart){
    
     
     const shipping=cart.length>0?10:0;
-    const total=subtotal+shipping;
+    let total=subtotal+shipping;
+    
     const subtotalElement = document.querySelector('.cart__total-table tr:nth-child(1) .cart__total-price');
     const shippingElement = document.querySelector('.cart__total-price-shipping');
     const totalElement = document.querySelector('.cart__total-price-subtotal');
+    
     if (subtotalElement) subtotalElement.innerText = `$${subtotal.toFixed(2)}`;
     if (shippingElement) shippingElement.innerText = `$${shipping.toFixed(2)}`;
   if (totalElement) totalElement.innerText = `$${total.toFixed(2)}`;
   if(typeof updateCartBadge==="function"){
     updateCartBadge()
+    
      }
+     if(typeof checkProductSection==="function"){
+        checkProductSection()
+     }
+     
+     if(typeof checkoutShow==="function"){
+        checkoutShow()
+     }
+
+
 }
+
 document.addEventListener('DOMContentLoaded', renderCart);
