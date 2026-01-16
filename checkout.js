@@ -9,6 +9,7 @@ let overallSubtotal=0;
 cart.forEach(cartitem=>{
 const price = parseFloat(String(cartitem.price).replace(/[^0-9.]/g, '')) || 0;
 const qty = parseInt(cartitem.qty) || 1;
+console.log(qty)
 const itemSubtotal = price * qty;
      overallSubtotal+=itemSubtotal
  checkoutProductDiv.innerHTML+=`
@@ -19,7 +20,7 @@ const itemSubtotal = price * qty;
         </td>
         <td class="product-section-textBox">
             <h2 class="product-title-checkout">${cartitem.title}</h2>
-            <h2 class="product-quantity-checkout">x${cartitem.qty}</h2>
+            <h2 class="product-quantity-checkout">x${cartitem.qty || 1}</h2>
         </td>
         <td class="product-total-checkout">$${itemSubtotal.toFixed(2)}</td>
     </tr> `

@@ -81,8 +81,8 @@ document.addEventListener('DOMContentLoaded',()=>{
 <div class="details-action">
     <input type="number" class="quantity" value="1" min="1">
 <a href="#" class="btn btn--sm" id="addtocart">Add To Cart</a>
-<a href="#" class="details__action-btn">
-    <i  class="fi fi-rs-heart"></i>
+<a href="#" class="details__action-btn" id="add-to-wishlist">
+     <i  class="fi fi-rs-heart"></i>
 </a>
 </div>
 <ul class="details__meta">
@@ -105,7 +105,9 @@ relatedProductApi(newProduct)
 document.querySelectorAll('#addtocart').forEach(btn=>{
     btn.addEventListener('click',addtoCartFunc)
 })
-
+ let wishlistbtn=document.querySelectorAll('#add-to-wishlist').forEach((btn)=>{
+    btn.addEventListener('click',wishListDetailsFunc)
+  })
     
 })
 
@@ -183,11 +185,11 @@ try{
                             <a href="#" class="action__btn" aria-label="Quick view">
                                 <i class="fi fi-rs-eye"></i>
                             </a>
-                             <a href="#" class="action__btn" aria-label="Add To Wishlist">
+                             <a href="#" class="action__btn" aria-label="Add To Wishlist" id="add-to-wishlist" onClick="getid(${product.id})">
                                 <i class="fi fi-rs-heart"></i>
                             </a>
-                             <a href="#" class="action__btn" aria-label="Compare">
-                                <i class="fi fi-rs-shuffle"></i>
+                             <a href="#" class="action__btn" aria-label="Compare" onclick="compareFunc(event, ${product.id})">
+                                <i class="fi fi-rs-shuffle" ></i>
                             </a>
                         </div>
                         <div class="product__badge light-pink">Hot</div>
@@ -214,6 +216,11 @@ try{
                     </div>
                 </div>
      `
+      let wishlistbtn=document.querySelectorAll('#add-to-wishlist').forEach((btn)=>{
+    btn.addEventListener('click',wishListDetailsRelFunc)
+    let comparebtn=document.querySelectorAll('#compare-btn').forEach(btn=>{
+    btn.addEventListener('click',compareFunc)})
+  })
     })
 }
 
@@ -249,4 +256,80 @@ function addtoCartFunc(e){
   
    alert('product added')
     location.reload();
+}
+// wishlist-js
+function wishListDetailsFunc(e){
+  e.preventDefault()
+  let section=e.currentTarget.closest('.details__container')
+ 
+let productWishlist={
+   id:localStorage.getItem('id'),
+   title:document.querySelector('.details__title').innerText,
+   image:section.querySelector('img').src,
+   price:section.querySelector('.new__price').innerText,
+}
+   let wishlist=JSON.parse(localStorage.getItem('wishlist'))||[]
+   let exists=wishlist.find(item=>item.id===productWishlist.id)
+   if(exists){
+   alert('already added!Wishlist Checkout')
+}
+     else{
+       wishlist.push(productWishlist)
+       alert('WishList Added!')
+       location.reload()
+     }
+     localStorage.setItem('wishlist',JSON.stringify(wishlist))
+  
+}
+function wishListDetailsRelFunc(e){
+    e.preventDefault()
+    let section=e.currentTarget.closest('.product__item')
+    let productWishlistRel={
+        id:localStorage.getItem('id'),
+        image:section.querySelector('img').src,
+        title:section.querySelector('.product-title').innerText,
+        price:section.querySelector('.new__price').innerText
+    }
+      let wishlist=JSON.parse(localStorage.getItem('wishlist'))||[]
+   let exists=wishlist.find(item=>item.id===productWishlistRel.id)
+   if(exists){
+   alert('already added!Wishlist Checkout')
+}
+     else{
+       wishlist.push(productWishlistRel)
+       alert('WishList Added!')
+       location.reload()
+     }
+     localStorage.setItem('wishlist',JSON.stringify(wishlist))
+  
+    
+}
+function compareFunc(e, productId) {
+    e.preventDefault();
+    let section = e.currentTarget.closest('.product__item');
+    
+    let product = {
+
+        id: String(productId), 
+        title: section.querySelector('.product-title').innerText,
+        image: section.querySelector('img').src,
+        price: section.querySelector('.new__price').innerText
+    };
+
+    let compare = JSON.parse(localStorage.getItem('compare')) || [];
+    
+    
+    let exists = compare.find(compareitem => String(compareitem.id) === String(product.id));
+
+    if (exists) {
+        alert('Product already added! Add Another');
+    } 
+    else if (compare.length >= 3) {
+        alert('You can only compare a maximum of 3 products. Please remove one first.');
+    } 
+    else {
+        compare.push(product);
+        alert('Product added to comparison!');
+        localStorage.setItem('compare', JSON.stringify(compare));
+    }
 }

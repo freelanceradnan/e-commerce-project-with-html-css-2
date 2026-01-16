@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded',()=>{
                              <a href="#" class="action__btn" aria-label="Add To Wishlist" id="add-to-wishlist" onClick="getid(${product.id})">
                                 <i class="fi fi-rs-heart"></i>
                             </a>
-                             <a href="#" class="action__btn" aria-label="Compare">
+                             <a href="#" class="action__btn" aria-label="Compare"  id="compare-btn" onClick="getid(${product.id})"> 
                                 <i class="fi fi-rs-shuffle"></i>
                             </a>
                         </div>
@@ -146,6 +146,8 @@ if(productContainers[2]) productContainers[2].innerHTML+=productHTML
    let wishlistbtn=document.querySelectorAll('#add-to-wishlist').forEach((btn)=>{
     btn.addEventListener('click',wishListFunc)
   })
+  let comparebtn=document.querySelectorAll('#compare-btn').forEach(btn=>{
+    btn.addEventListener('click',compareFunc)})
    }
    catch(error){
 console.log('error getting products:',error)
@@ -269,4 +271,30 @@ function wishListFunc(e){
   }
   localStorage.setItem('wishlist',JSON.stringify(wishlist))
   
+}
+function compareFunc(e){
+e.preventDefault();
+let section=e.currentTarget.closest('.product__item')
+let product={
+  id:localStorage.getItem('id'),
+  title:section.querySelector('.product-title').innerText,
+  image:section.querySelector('img').src,
+  price:section.querySelector('.new__price').innerText
+}
+
+let compare=JSON.parse(localStorage.getItem('compare'))||[]
+let exists=compare.find(item=>item.id===product.id)
+
+if(exists){
+   alert('Product already added!Add Another')
+}
+else if (compare.length >= 3) {
+        alert('You can only compare a maximum of 3 products. Please remove one first.');
+}
+else {
+        compare.push(product);
+        alert('Product added to comparison!');
+        localStorage.setItem('compare', JSON.stringify(compare));
+    }
+
 }

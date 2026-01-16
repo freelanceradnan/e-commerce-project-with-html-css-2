@@ -3,17 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="images/logo.svg" type="image/x-icon">
-    <title>Ecommerce website</title>
-    <!-- swiper-links -->
      <!-- flaticon -->
       <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-straight/css/uicons-regular-straight.css'>
+     <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css"
+/>
 <!-- ex-css -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- header-section -->
-<header class="header">
+<!-- header-section -->
+    <header class="header">
 <div class="header__top">
     <div class="header__container container">
         <div class="header__contact">
@@ -36,16 +37,16 @@
     <div class="nav__menu" id="nav-menu">
         <ul class="nav__list">
             <li class="nav__item">
-            <a href="index.html" class="nav__link ">Home</a>
+            <a href="index.html" class="nav__link">Home</a>
             </li>
             <li class="nav__item">
-            <a href="shop.html" class="nav__link active-link">Shop</a>
+            <a href="shop.html" class="nav__link">Shop</a>
             </li>
             <li class="nav__item">
             <a href="accounts.html" class="nav__link">My Account</a>
             </li>
             <li class="nav__item">
-            <a href="compare.html" class="nav__link">Compare</a>
+            <a href="compare.html" class="nav__link active-link">Compare</a>
             </li>
             <li class="nav__item">
             <a href="login-register.html" class="nav__link">login</a>
@@ -61,7 +62,7 @@
     <div class="header__user-actions">
 <a href="wishlist.html" class="header__action-btn">
     <img src="images/icon-heart.svg" alt="">
-    <span class="count" id="counter__total-wishlist">3</span>
+    <span class="count" id="counter__total-wishlist"></span>
 </a>
 
 <a href="cart.html" class="header__action-btn">
@@ -72,30 +73,30 @@
 </nav>
 
 </header>
-<!-- main-section -->
-  <main class="main">
-    <!-- breadcrumb -->
+<main class="main">
      <section class="breadcrumb">
 <ul class="breadcrumb__list flex container">
     <li><a href="index.html" class="breadcrumb__link">Home</a></li>
     <li><span class="breadcrumb__link">></span></li>
     <li><span class="breadcrumb__link">Shop</span></li>
+     <li><span class="breadcrumb__link">></span></li>
+    <li><span class="breadcrumb__link">Compare</span></li>
 </ul>
      </section>
-<!-- product-section -->
- <section class="products container section--lg">
-    <p class="total__products">We found <span id="product-counter">680</span>items for you!</p>
- <div class="product__container grid" id="product-section">
-               
-
-            </div>
-<ul id="pagination">
-   
-    </a></li>
-</ul>
+<!-- compare-section -->
+ <section class="compare container section--lg">
+<table class="compare__table" id="compare-table-dynamic">
+    <tr id="row-image"><th>Image</th></tr>
+    <tr id="row-title"><th>Title</th></tr>
+    <tr id="row-price"><th>Price</th></tr>
+    <tr id="row-stock"><th>Stock</th></tr>
+    <tr id="row-buy"><th>Add To Cart</th></tr>
+    <tr id="row-remove"><th>Remove</th></tr>
+    
+</table>
  </section>
- <!-- news-letter-section -->
-       <section class="newsletter section">
+     <!-- newsletter -->
+      <section class="newsletter section">
 <div class="newsletter__container container grid">
     <h3 class="newsletter__title flex">
         <img src="images/icon-email.svg" alt="" class="newsletter__icon">
@@ -110,8 +111,8 @@
     </form>
 </div>
      </section>
-  </main>
-     <!-- footer-section -->
+</main>
+<!-- footer-section -->
      <footer class="footer container">
         <div class="footer__container grid">
             <div class="footer__content">
@@ -188,20 +189,16 @@
                 Designed by ADNAN DEV.
             </span>
      </div>   
-     </footer>
+     </footer> 
+<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
 
- <script>
-function getid(id){
-    localStorage.setItem('id',id)
-    
-}
- 
- </script>
-
-
-  <script src="shop.js"></script>
   <script src="common.js"></script>
+  <script src="wishlist.js"></script>
   <script src="common-wishlist.js"></script>
-
+  <script src="checkout.js"></script>
+  <script src="cart.js"></script>
+  <script src="compare.js"></script>
+  <script src="main.js"></script>
+<!-- breadcrumb -->
 </body>
-</html> 
+</html>

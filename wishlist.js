@@ -69,11 +69,7 @@ function addtoCartFunc(e){
         
         price:numericPrice,
    }
-   console.log(product.id)
-   console.log(product.title)
-   console.log(product.image)
-   console.log(product.qty)
-   console.log(product.price)
+  
    
    let cart=JSON.parse(localStorage.getItem('cart'))||[]
    const exists=cart.find(item=>item.id===product.id)

@@ -35,7 +35,7 @@ const showpageNumber=(pageNumber)=>{
                              <a href="#" class="action__btn" aria-label="Add To Wishlist">
                                 <i class="fi fi-rs-heart" id="add-to-wishlist" onClick="getid(${product.id})"></i>
                             </a>
-                             <a href="#" class="action__btn" aria-label="Compare">
+                             <a href="#" class="action__btn" aria-label="Compare" onclick="compareFunc(event, ${product.id})"/>
                                 <i class="fi fi-rs-shuffle"></i>
                             </a>
                         </div>
@@ -69,6 +69,9 @@ const showpageNumber=(pageNumber)=>{
     
   })
   
+   let comparebtn=document.querySelectorAll('#compare-btn').forEach(btn=>{
+    btn.addEventListener('click',compareFunc)})
+   
     })
     
     
@@ -98,13 +101,13 @@ const renderPaginationButtons = () => {
     }
 }
 // wishlist--section
-function wishListFunc(e){
+function wishListFunc(e,productId){
   e.preventDefault()
   let section=e.currentTarget.closest('.product__item')
   let fullTitle=section.querySelector('.product-title').innerText
   let shortTitle=fullTitle.split(' ').slice(0,4).join(' ')
   let productWishlist={
-    id:localStorage.getItem('id'),
+    id: String(productId),
     title:shortTitle,
     image:section.querySelector('img').src,
     price:section.querySelector('.new__price').innerText,
@@ -124,4 +127,33 @@ function wishListFunc(e){
   
 }
 
+function compareFunc(e, productId) {
+    e.preventDefault();
+    let section = e.currentTarget.closest('.product__item');
+    
+    let product = {
+        // Use the productId passed from the HTML, not localStorage
+        id: String(productId), 
+        title: section.querySelector('.product-title').innerText,
+        image: section.querySelector('img').src,
+        price: section.querySelector('.new__price').innerText
+    };
+
+    let compare = JSON.parse(localStorage.getItem('compare')) || [];
+    
+    // Ensure we compare strings to strings
+    let exists = compare.find(compareitem => String(compareitem.id) === String(product.id));
+
+    if (exists) {
+        alert('Product already added! Add Another');
+    } 
+    else if (compare.length >= 3) {
+        alert('You can only compare a maximum of 3 products. Please remove one first.');
+    } 
+    else {
+        compare.push(product);
+        alert('Product added to comparison!');
+        localStorage.setItem('compare', JSON.stringify(compare));
+    }
+}
 document.addEventListener('DOMContentLoaded',productLoader)
