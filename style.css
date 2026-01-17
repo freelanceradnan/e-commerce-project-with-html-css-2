@@ -1455,12 +1455,77 @@ font-weight: var(--weight-600);
     color: red;
     transition: 0.3s;
 }
+/* account-page */
+.accounts__container{
+    grid-template-columns: 4fr 8fr;
+}
+.tab__content:not(.active-tab){
+    display: none;
+}
+.account__tabs{
+    border:1px solid var(--border-color-alt);
+    border-radius: 0.25rem;
+}
+.account__tab{
+    padding:1rem 2rem;
+    color:var(--text-color);
+    font-size:var(--small-font-size);
+    display: flex;
+    align-items: cjenter;
+    column-gap:0.625rem;
+    cursor: pointer;
+}
+.account__tab.active-tab{
+    background-color:var(--first-color);
+    color:var(--body-color)
+}
+.account__tab:not(:last-child){
+    border-bottom:1px solid var(--border-color-alt);
+    
+}
+.tab__content{
+    border:1px solid var(--border-color-alt)
+}
+.tab__header{
+    background-color:var(--container-color);
+    border-bottom: 1px solid var(--border-color-alt);
+    padding:1rem;
+    font-size:var(--small-font-size)
+}
+.tab__body{
+    padding:1rem;
+}
+.placed__order-table tr th{
+    color:var(--title-color);
+    text-align: left;
+}
+.placed__order-table tr th,
+.placed__order-table tr td{
+    border:1px solid var(--border-color-alt);
+    padding:.5rem;
+    font-size:var(--small-font-size);
+}
+.view__order,
+.edit{
+    color:var(--first-color)
+}
+.address{
+    font-style:normal;
+    font-size:var(--small-font-size);
+    line-height: 1.5rem;
 
+}
+.city{
+    margin-bottom:0.25rem;
+}
+.edit{
+    font-size:var(--small-font-size)
+}
 /* Mobile Responsiveness */
 @media screen and (max-width: 768px) {
     .compare__table {
         display: block;
-        overflow-x: auto; /* Adds scrollbar if too many products */
+        overflow-x: auto; 
         white-space: nowrap;
     }
 }
