@@ -298,3 +298,67 @@ else {
     }
 
 }
+
+//search-box section
+
+const searchInput = document.querySelector('[data-search]');
+const suggestionBox = document.getElementById('data-suggestion');
+const searchBtn = document.querySelector('.search__btn'); // 
+
+let product = [];
+
+
+fetch('https://fakestoreapi.com/products')
+    .then(res => res.json())
+    .then(data => {
+        product = data;
+    })
+    .catch(err => console.log("Error fetching products:", err));
+
+
+searchInput.addEventListener('input', (e) => {
+    const value = e.target.value.toLowerCase();
+    suggestionBox.innerHTML = '';
+    
+    if (value.length > 0) {
+        
+        const matchFinder = product.filter(p => 
+            p.title.toLowerCase().includes(value)
+        ).slice(0, 6);
+        
+        if (matchFinder.length > 0) {
+            suggestionBox.classList.remove('hide');
+            matchFinder.forEach(match => {
+                const div = document.createElement('div');
+                div.classList.add('suggestion-item');
+                div.textContent = match.title;
+                div.onclick = () => goToResult(match.title);
+                suggestionBox.appendChild(div);
+            });
+        } else {
+            suggestionBox.classList.add('hide');
+        }
+    } else {
+        suggestionBox.classList.add('hide');
+    }
+});
+
+
+searchBtn.addEventListener('click', () => {
+    goToResult(searchInput.value);
+});
+
+
+searchInput.addEventListener('keypress', (e) => {
+    if (e.key === "Enter") { 
+        goToResult(searchInput.value);
+    }
+});
+
+
+function goToResult(query) {
+    if (!query.trim()) return; 
+    
+    localStorage.setItem('searchQuary', query); 
+    window.location.href = 'result.html';
+}

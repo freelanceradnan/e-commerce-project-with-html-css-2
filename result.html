@@ -49,10 +49,15 @@
             <a href="compare.html" class="nav__link">Compare</a>
             </li>
             <li class="nav__item">
-            <a href="login-register.html" class="nav__link  active-link">login</a>
+            <a href="login-register.html" class="nav__link">login</a>
             </li>
         </ul>
-        
+        <div class="header__search">
+            <input type="text" placeholder="Search for items..." class="form__input">
+            <button class="search__btn">
+                <img src="images/search.png" alt="">
+            </button>
+        </div>
     </div>
     <div class="header__user-actions">
 <a href="wishlist.html" class="header__action-btn">
@@ -73,37 +78,15 @@
 <ul class="breadcrumb__list flex container">
     <li><a href="index.html" class="breadcrumb__link">Home</a></li>
     <li><span class="breadcrumb__link">></span></li>
-    <li><span class="breadcrumb__link">Login/Register</span></li>
+    <li><span class="breadcrumb__link">Search</span></li>
+     
 </ul>
      </section>
-<!-- login-register -->
-<section class="login-register section--lg">
-<div class="login-register__container container grid">
-   <div class="login">
-     <h3 class="section__title">Login</h3>
-    <form action="" class="form grid">
-        <input type="email" class="form__input" placeholder="Your Email">
-        <input type="password" class="form__input" placeholder="Your Password">
-        <div class="form__btn">
-            <button class="btn">Login</button>
-        </div>
-    </form>
-   </div>
-
-   <div class="register">
-     <h3 class="section__title">Create an Account</h3>
-    <form action="" class="form grid">
-        <input type="text" class="form__input" placeholder="Username">
-        <input type="email" class="form__input" placeholder="Your Email">
-        <input type="password" class="form__input" placeholder="Your Password">
-        <input type="password" class="form__input" placeholder="Confirm Password">
-        <div class="form__btn">
-            <button class="btn">Submit & Register</button>
-        </div>
-    </form>
-   </div>
+<!-- result product section-section -->
+<div class="result-section section container">
+    <div class="result-title"></div>
+    <div class="result-products"></div>
 </div>
-</section>
      <!-- newsletter -->
       <section class="newsletter section">
 <div class="newsletter__container container grid">
@@ -199,12 +182,64 @@
             </span>
      </div>   
      </footer> 
-<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+     <script>
+const resultTitle=document.getElementsByClassName('result-title')
+const resultProducts=document.querySelector('.result-products')
+const query=localStorage.getItem('searchQuary')
+if(query){
+    resultTitle.innerHTML = `Searching Results for: "<span>${query}</span>"`;
+}
+fetch('https://fakestoreapi.com/products')
+.then(res=>res.json())
+.then(data=>{
+    const filtered=data.filter(p=>p.title.toLowerCase().includes(query.toLocaleLowerCase()))
+    if(filtered.length===0){
+        resultProducts.innerHTML=`<h2>No Matching search Product Found!</h2>`  
+    }
+    else{
+        resultProducts.innerHTML = '';
+        filtered.forEach(item=>{
+        const card=document.createElement('div')
+        card.classList.add('product__item-result')
+        card.innerHTML=`
+         <div class="product__item">
+                    <div class="product__banner">
+                        <a href="details.html" onClick="getid(${item.id})" class="product__main-images">
+                            <img src="${item.image}" alt="" class="product__main-img default">
+                            <img src="${item.image}" alt="" class="product__main-img hover">
+                        </a>
+                        
+                    
+                    </div>
+<div class="product__content" onClick="window.location.href='details.html';getid(${item.id})">
+                        <span class="product__category">${item.category}</span>
+                        <a href="#">
+                            <h3 class="product-title">${item.title}</h3>
+                            </a>
+                            <div class="product-rating">
+                                <i class="fi fi-rs-star"></i>
+                                <i class="fi fi-rs-star"></i>
+                                <i class="fi fi-rs-star"></i>
+                                <i class="fi fi-rs-star"></i>
+                                <i class="fi fi-rs-star"></i>
+                            </div>
+                        <div class="product-price flex">
+                            <span class="new__price">$${item.price}</span>
+                            <span class="old__price">$245.85</span>
+                        </div>
+                         <a href="#" class="action__btn cart__btn" aria-label="Add to cart">
+                                <i class="fi fi-rs-shopping-bag-add"></i>
+                            </a>
+                    </div>
+                </div>
+        
+        `
+        resultProducts.appendChild(card)
+        })
+    }
+})
+     </script>
 
-  <script src="common.js"></script>
-  <script src="wishlist.js"></script>
-  <script src="common-wishlist.js"></script>
-  
 <!-- breadcrumb -->
 </body>
 </html>

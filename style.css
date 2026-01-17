@@ -1521,7 +1521,63 @@ font-weight: var(--weight-600);
 .edit{
     font-size:var(--small-font-size)
 }
-/* Mobile Responsiveness */
+/* search-section */
+
+.header__search {
+    position: relative; 
+    display: flex;
+    align-items: center;
+}
+
+
+.suggestion__box {
+    position: absolute;
+    top: 100%; 
+    left: 0;
+    width: 100%; 
+    background-color: var(--body-color);
+    border: 1px solid var(--border-color);
+    border-top: none; 
+    border-radius: 0 0 10px 10px; 
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+    max-height: 300px;
+    overflow-y: auto;
+} 
+
+
+.suggestion-item {
+    padding: 10px 15px;
+    font-size: var(--small-font-size);
+    font-family: var(--body-font);
+    cursor: pointer;
+    border-bottom: 1px solid var(--border-color-alt);
+    transition: all 0.2s ease;
+    text-align: left;
+    color: var(--text-color);
+}
+
+.suggestion-item:last-child {
+    border-bottom: none;
+}
+
+.suggestion-item:hover {
+    background-color: var(--first-color-alt);
+    color: var(--first-color);
+    padding-left: 20px; 
+}
+
+
+.hide {
+    display: none;
+}
+/* result pages */
+.resultTitle{
+    text-align: center;
+}
+.product__item-result{
+    max-width:250px;
+}
 @media screen and (max-width: 768px) {
     .compare__table {
         display: block;
