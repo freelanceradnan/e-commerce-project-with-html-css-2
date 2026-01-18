@@ -88,16 +88,16 @@ document.addEventListener('DOMContentLoaded',()=>{
    const productContainers=document.querySelectorAll('.product__container')
      
   if(productContainers.length === 0||data.length === 0)return;
-   data.forEach((product, index)=>{
+   data.map((product, index)=>{
     const productHTML=`
-     <div class="product__item">
+     <div class="product__item" data=${product.id}>
                     <div class="product__banner">
                         <a href="details.html" onClick="getid(${product.id})" class="product__main-images">
                             <img src="${product.image}" alt="" class="product__main-img default">
                             <img src="${product.image}" alt="" class="product__main-img hover">
                         </a>
                         <div class="product__actions">
-                            <a href="#" class="action__btn" aria-label="Quick view">
+                            <a href="#" class="action__btn" aria-label="Quick view" id="quick-btn">
                                 <i class="fi fi-rs-eye"></i>
                             </a>
                              <a href="#" class="action__btn" aria-label="Add To Wishlist" id="add-to-wishlist" onClick="getid(${product.id})">
@@ -141,13 +141,29 @@ document.addEventListener('DOMContentLoaded',()=>{
     else{
 if(productContainers[2]) productContainers[2].innerHTML+=productHTML
     }
-  
+
+ 
+ 
+ 
    })
    let wishlistbtn=document.querySelectorAll('#add-to-wishlist').forEach((btn)=>{
     btn.addEventListener('click',wishListFunc)
   })
   let comparebtn=document.querySelectorAll('#compare-btn').forEach(btn=>{
     btn.addEventListener('click',compareFunc)})
+
+    let quickbtn=document.querySelectorAll('#quick-btn').forEach((btn)=>{
+    btn.addEventListener('click',(e)=>{
+      const card=e.target.closest('.product__item')
+     
+      
+      if(!card) return;
+      const productId=card.getAttribute('data')
+      const selectedProduct=data.find(p=>String(p.id)==productId)
+      renderPreview(selectedProduct)
+    })
+  })
+   
    }
    catch(error){
 console.log('error getting products:',error)
@@ -198,6 +214,7 @@ document.addEventListener('DOMContentLoaded',()=>{
                             <span class="new__price">$${product.price}</span>
                             <span class="old__price">$245.85</span>
                         </div>
+                        
     </a>
       `
     }
@@ -361,4 +378,52 @@ function goToResult(query) {
     
     localStorage.setItem('searchQuary', query); 
     window.location.href = 'result.html';
+}
+// popup
+let previewContainer=document.querySelector('.preview-container')
+function renderPreview(product){
+
+previewContainer.style.display="flex"
+previewContainer.innerHTML=`
+<div class="preview active" data=${product.id}>
+<i class="fas fa-times close-icon" id="close-preview"></i>
+                    <div class="product__banner">
+                        <a href="details.html" onClick="getid(${product.id})" class="product__main-images">
+                            <img src="${product.image}" alt="" class="product__main-img default">
+                            <img src="${product.image}" alt="" class="product__main-img hover">
+                        </a>
+                       
+                        
+                    </div>
+<div class="product__content" onClick="window.location.href='details.html';getid(${product.id})">
+                        <span class="product__category">${product.category}</span>
+                        <a href="#">
+                            <h3 class="product-title">${product.title}</h3>
+                            </a>
+                            <div class="product-rating">
+                                <i class="fi fi-rs-star"></i>
+                                <i class="fi fi-rs-star"></i>
+                                <i class="fi fi-rs-star"></i>
+                                <i class="fi fi-rs-star"></i>
+                                <i class="fi fi-rs-star"></i>
+                            </div>
+                        <div class="quickview-price flex">
+                            <span class="new__price">$${product.price}</span>
+                            <span class="old__price">$245.85</span>
+                        </div>
+                        <a href="#" class="btn btn--sm" >Add to Cart</a>
+    
+           
+        
+                    </div>
+                </div>
+`
+document.getElementById('close-preview').onclick = () => {
+        previewContainer.style.display = 'none';
+    };
+window.onclick=(e)=>{
+  if(e.target===previewContainer){
+    previewContainer.style.display='none'
+  }
+}
 }

@@ -1566,7 +1566,46 @@ font-weight: var(--weight-600);
     color: var(--first-color);
     padding-left: 20px; 
 }
+/* Container for the grid */
+.product__item-result {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 0px;
+    padding: 20px;
+}
 
+/* The Card Style */
+.product__item {
+    background: #fff;
+    border: 1px solid #e1e1e1;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 280px; 
+    height: 380px;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.product__main-images img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; 
+    padding: 15px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: opacity 0.4s ease;
+}
+
+
+
+
+.cart__btn:hover {
+    background: #2bb673;
+    color: white;
+}
 
 .hide {
     display: none;
@@ -1577,6 +1616,64 @@ font-weight: var(--weight-600);
 }
 .product__item-result{
     max-width:250px;
+}
+.result-products{
+    display:flex!important;
+    flex-wrap: wrap;
+    column-gap:20px;
+}
+
+.preview-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    display:none;        
+    align-items: center;   
+    justify-content: center;
+}
+
+
+.preview-container .preview {
+    display:none;         
+    background: #fff;
+    padding: 2rem;
+    text-align: center;
+    width: 30rem;
+    border-radius: 10px;
+    position: relative;   
+    box-shadow: 0 10px 15px rgba(0,0,0,0.3);
+} 
+#close-preview{
+    position: absolute;
+    top:10px;
+    right:10px;
+}
+.close-icon {
+    display: inline-block; 
+    cursor: pointer;
+    transition: transform 0.3s ease; 
+    font-size: 25px;
+    
+}
+
+.close-icon:hover {
+    transform: rotate(90deg) !important;
+    color: red; /* বোঝার সুবিধার্থে কালার যোগ করা হয়েছে */
+}
+
+/* Show the box when active */
+.preview-container .preview.active {
+    display: inline-block;
+}
+.quickview-price{
+    display: flex;
+    align-items: center;
+    padding-block: 0.8rem;
+    display: block;
 }
 @media screen and (max-width: 768px) {
     .compare__table {
