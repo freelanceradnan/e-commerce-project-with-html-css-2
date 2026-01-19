@@ -349,63 +349,63 @@ function compareFunc(e, productId) {
 
 
 
-document.addEventListener('DOMContentLoaded', () => {
+// document.addEventListener('DOMContentLoaded', () => {
   
-    initSearchLogic(); 
-});
+//     initSearchLogic(); 
+// });
 
 
-function initSearchLogic() {
-    const searchInput = document.querySelector('[data-search]');
-    const suggestionBox = document.getElementById('data-suggestion');
-    const searchBtn = document.querySelector('.search__btn');
+// function initSearchLogic() {
+//     const searchInput = document.querySelector('[data-search]');
+//     const suggestionBox = document.getElementById('data-suggestion');
+//     const searchBtn = document.querySelector('.search__btn');
 
-    let products = []; 
-    fetch('https://fakestoreapi.com/products')
-        .then(res => res.json())
-        .then(data => {
-            products = data;
-        });
+//     let products = []; 
+//     fetch('https://fakestoreapi.com/products')
+//         .then(res => res.json())
+//         .then(data => {
+//             products = data;
+//         });
 
-    searchInput.addEventListener('input', (e) => {
-        const value = e.target.value.toLowerCase();
-        suggestionBox.innerHTML = '';
+//     searchInput.addEventListener('input', (e) => {
+//         const value = e.target.value.toLowerCase();
+//         suggestionBox.innerHTML = '';
 
-        if (value.length > 0) {
-            const matchFinder = products.filter(p =>
-                p.title.toLowerCase().includes(value)
-            ).slice(0, 6);
+//         if (value.length > 0) {
+//             const matchFinder = products.filter(p =>
+//                 p.title.toLowerCase().includes(value)
+//             ).slice(0, 6);
 
-            if (matchFinder.length > 0) {
-                suggestionBox.classList.remove('hide');
-                matchFinder.forEach(match => {
-                    const div = document.createElement('div');
-                    div.classList.add('suggestion-item');
-                    div.textContent = match.title;
-                    div.onclick = () => goToResult(match.title);
-                    suggestionBox.appendChild(div);
-                });
-            } else {
-                suggestionBox.classList.add('hide');
-            }
-        } else {
-            suggestionBox.classList.add('hide');
-        }
-    });
+//             if (matchFinder.length > 0) {
+//                 suggestionBox.classList.remove('hide');
+//                 matchFinder.forEach(match => {
+//                     const div = document.createElement('div');
+//                     div.classList.add('suggestion-item');
+//                     div.textContent = match.title;
+//                     div.onclick = () => goToResult(match.title);
+//                     suggestionBox.appendChild(div);
+//                 });
+//             } else {
+//                 suggestionBox.classList.add('hide');
+//             }
+//         } else {
+//             suggestionBox.classList.add('hide');
+//         }
+//     });
 
-    searchBtn.addEventListener('click', () => goToResult(searchInput.value));
+//     searchBtn.addEventListener('click', () => goToResult(searchInput.value));
 
-    searchInput.addEventListener('keypress', (e) => {
-        if (e.key === "Enter") goToResult(searchInput.value);
-    });
-}
+//     searchInput.addEventListener('keypress', (e) => {
+//         if (e.key === "Enter") goToResult(searchInput.value);
+//     });
+// }
 
 function goToResult(query) {
     if (!query.trim()) return;
     localStorage.setItem('searchQuary', query);
     window.location.href = 'result.html';
 }
-//hambarger menu
+// //hambarger menu
 const navMenu=document.getElementById('nav-menu'),
 navToggle=document.getElementById('nav-toggle'),
 navClose=document.getElementById('nav-close')

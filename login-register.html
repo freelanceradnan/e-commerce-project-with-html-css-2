@@ -212,6 +212,23 @@
             </span>
      </div>   
      </footer> 
+     <script>
+        //hambarger menu
+const navMenu=document.getElementById('nav-menu'),
+navToggle=document.getElementById('nav-toggle'),
+navClose=document.getElementById('nav-close')
+if(navToggle){
+  navToggle.addEventListener('click',()=>{
+    navMenu.classList.add('show-menu')
+  })
+}
+if(navClose){
+  console.log(navClose)
+  navClose.addEventListener('click',()=>{
+    navMenu.classList.remove('show-menu')
+  })
+}
+     </script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
 
   <script src="common.js"></script>

@@ -323,16 +323,52 @@ Dhaka,Bangladesh
         function getid(id){
             localStorage.setItem('id',id)
         }
+        document.addEventListener('DOMContentLoaded', () => {
+    const tabs = document.querySelectorAll('.account__tab');
+    const contents = document.querySelectorAll('.tab__content');
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const target = document.querySelector(tab.dataset.target);
+
+            
+            tabs.forEach(t => t.classList.remove('active-tab'));
+            
+            
+            contents.forEach(c => c.classList.remove('active-tab'));
+
+           
+            tab.classList.add('active-tab');
+
+            
+            target.classList.add('active-tab');
+        });
+    });
+});
+
+//hambarger menu
+const navMenu=document.getElementById('nav-menu'),
+navToggle=document.getElementById('nav-toggle'),
+navClose=document.getElementById('nav-close')
+if(navToggle){
+  navToggle.addEventListener('click',()=>{
+    navMenu.classList.add('show-menu')
+  })
+}
+if(navClose){
+  console.log(navClose)
+  navClose.addEventListener('click',()=>{
+    navMenu.classList.remove('show-menu')
+  })
+}
+
      </script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
 
-  <script src="common.js"></script>
-  <script src="wishlist.js"></script>
-  <script src="common-wishlist.js"></script>
-  <script src="checkout.js"></script>
-  <script src="cart.js"></script>
-  <script src="compare.js"></script>
-  <script src="main.js"></script>
+  
+ 
+
+ 
 <!-- breadcrumb -->
 </body>
 </html>
