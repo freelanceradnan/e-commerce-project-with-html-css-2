@@ -35,6 +35,15 @@
     </a>
 
     <div class="nav__menu" id="nav-menu">
+        <div class="nav__menu-top">
+            <a href="index.html" class="nav__menu-logo">
+                <img src="images/logo.svg" alt="">
+            </a>
+
+        <div class="nav__close" id="nav-close">
+            <i class="fi fi-rs-cross-small"></i>
+        </div>
+        </div>
         <ul class="nav__list">
             <li class="nav__item">
             <a href="index.html" class="nav__link">Home</a>
@@ -53,9 +62,10 @@
             </li>
         </ul>
         
+        <div class="cart__container" data-container></div>
     </div>
     <div class="header__user-actions">
-<a href="wishlist.html" class="header__action-btn">
+<a href="wishlist.html  active-link" class="header__action-btn">
     <img src="images/icon-heart.svg" alt="">
     <span class="count" id="counter__total-wishlist"></span>
 </a>
@@ -64,6 +74,9 @@
     <img src="images/icon-cart.svg" alt="">
     <span class="count" id="counter__total"></span>
 </a>
+<div class="header__action-btn nav__toggle" id="nav-toggle">
+<img src="images/menu-burger.svg" alt="">
+</div>
     </div>
 </nav>
 
@@ -233,6 +246,21 @@ fetch('https://fakestoreapi.com/products')
         })
     }
 })
+//hambarger menu
+const navMenu=document.getElementById('nav-menu'),
+navToggle=document.getElementById('nav-toggle'),
+navClose=document.getElementById('nav-close')
+if(navToggle){
+  navToggle.addEventListener('click',()=>{
+    navMenu.classList.add('show-menu')
+  })
+}
+if(navClose){
+  console.log(navClose)
+  navClose.addEventListener('click',()=>{
+    navMenu.classList.remove('show-menu')
+  })
+}
      </script>
 
 <!-- breadcrumb -->
