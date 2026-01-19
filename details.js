@@ -175,14 +175,14 @@ try{
     filterProducts.forEach((product)=>{
      productContainer.innerHTML+=`
      
-     <div class="product__item">
+     <div class="product__item" data=${product.id}>
                     <div class="product__banner">
                         <a href="details.html" onClick="getid(${product.id})" class="product__main-images">
                             <img src="${product.image}" alt="" class="product__main-img default">
                             <img src="${product.image}" alt="" class="product__main-img hover">
                         </a>
                         <div class="product__actions">
-                            <a href="#" class="action__btn" aria-label="Quick view">
+                            <a href="#" class="action__btn" aria-label="Quick view" id="quick-btn">
                                 <i class="fi fi-rs-eye"></i>
                             </a>
                              <a href="#" class="action__btn" aria-label="Add To Wishlist" id="add-to-wishlist" onClick="getid(${product.id})">
@@ -220,6 +220,19 @@ try{
     btn.addEventListener('click',wishListDetailsRelFunc)
     let comparebtn=document.querySelectorAll('#compare-btn').forEach(btn=>{
     btn.addEventListener('click',compareFunc)})
+   
+  })
+    let quickbtn=document.querySelectorAll('#quick-btn').forEach((btn)=>{
+    btn.addEventListener('click',(e)=>{
+        
+      const card=e.target.closest('.product__item')
+     
+      
+      if(!card) return;
+      const productId=card.getAttribute('data')
+      const selectedProduct=data.find(p=>String(p.id)==productId)
+      renderPreview(selectedProduct)
+    })
   })
     })
 }

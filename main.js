@@ -13,8 +13,11 @@ var swiperCategories = new Swiper(".categories__container", {
     0: {
       slidesPerView: 1,
     },
+    540:{
+    slidesPerView: 2,
+    },
     640: {
-      slidesPerView: 2,
+      slidesPerView: 3,
     },
     768: {
       slidesPerView: 4,
@@ -40,8 +43,11 @@ var swiperProducts = new Swiper(".new__container", {
     0: {
       slidesPerView: 1,
     },
+    540:{
+    slidesPerView: 2,
+    },
     640: {
-      slidesPerView: 2,
+      slidesPerView: 3,
     },
     768: {
       slidesPerView: 4,
@@ -411,7 +417,7 @@ previewContainer.innerHTML=`
                             <span class="new__price">$${product.price}</span>
                             <span class="old__price">$245.85</span>
                         </div>
-                        <a href="#" class="btn btn--sm" >Add to Cart</a>
+                        <a href="#" class="btn btn--sm">Add to Cart</a>
     
            
         
@@ -426,4 +432,19 @@ window.onclick=(e)=>{
     previewContainer.style.display='none'
   }
 }
+}
+//hambarger menu
+const navMenu=document.getElementById('nav-menu'),
+navToggle=document.getElementById('nav-toggle'),
+navClose=document.getElementById('nav-close')
+if(navToggle){
+  navToggle.addEventListener('click',()=>{
+    navMenu.classList.add('show-menu')
+  })
+}
+if(navClose){
+  console.log(navClose)
+  navClose.addEventListener('click',()=>{
+    navMenu.classList.remove('show-menu')
+  })
 }
